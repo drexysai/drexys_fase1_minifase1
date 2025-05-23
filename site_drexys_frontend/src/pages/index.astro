@@ -1,35 +1,184 @@
 ---
-// Componente Astro
+// Componente Astro - Página inicial
 ---
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drexys - Hello World</title>
+    <title>Drexys - Microserviços de IA</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .container {
-            background: white;
-            color: #333;
-            padding: 2rem;
-            border-radius: 10px;
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2rem;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .description {
+            font-size: 1.1em;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
             display: inline-block;
-            margin-top: 5rem;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        .features {
+            margin-top: 3rem;
+            text-align: left;
+        }
+        
+        .feature {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.5em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Drexys funcionando!</h1>
-        <p>Frontend Astro + React funcionando via Docker!</p>
-        <p><small>Servido pelo Nginx na porta 80</small></p>
+        <h1>🚀 Drexys</h1>
+        <p class="subtitle">Microserviços de IA para seu Negócio</p>
+        <p class="description">
+            Transforme seu negócio com soluções inteligentes. Chat IA personalizado, 
+            automação WhatsApp e cursos online integrados em uma plataforma única.
+        </p>
+        
+        <div class="buttons">
+            <a href="/auth/register" class="btn btn-primary">Começar Gratuitamente</a>
+            <a href="/auth/login" class="btn btn-secondary">Fazer Login</a>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🤖</span>
+                <span>Chat IA personalizado para seu negócio</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📱</span>
+                <span>Automação inteligente no WhatsApp</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎓</span>
+                <span>Cursos online com IA integrada</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                <span>Implementação rápida e escalável</span>
+            </div>
+        </div>
     </div>
+
+    <script type="module">
+        import { authService } from './services/auth.js';
+        
+        // Se já estiver logado, redirecionar para dashboard
+        if (authService.isAuthenticated()) {
+            const user = authService.getCurrentUser();
+            if (user) {
+                window.location.href = '/dashboard';
+            }
+        }
+    </script>
 </body>
 </html>
